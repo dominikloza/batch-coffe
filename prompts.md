@@ -2,108 +2,129 @@
 
 Ten dokument zawiera gotowe prompty do wygenerowania finalnych zdjęć (Midjourney) i wideo (Runway),
 które mają zastąpić tymczasowe placeholdery Unsplash w pliku `index.html`. Każdy prompt uwzględnia
-estetykę marki: **Terakota (#E2725B)**, **Kość słoniowa (#FAF9F6)**, **głęboki brąz espresso (#2B1700)**
-oraz naturalne, ciepłe światło.
+estetykę marki: **Terakota (#E2725B)**, **Kość słoniowa (#FAF9F6)**, **głęboki brąz espresso
+(#2B1700)** oraz naturalne, ciepłe światło.
 
 ---
 
-## 1. Sekcja HERO — zdjęcie główne
+## 1. Sekcja HERO — zdjęcie centralne pod nagłówkiem
 
-**Miejsce w kodzie:** `#hero`, kontener `div.relative.aspect-[4/5]...`
-**Proporcje:** mobile `4:5` (pionowe) → `sm` `5:4` (poziome) → `lg` `4:5` (pionowe, duży format)
-**Rola:** pierwsze wrażenie, emocjonalny "hook" — bliskość, ciepło, rzemiosło.
+**Miejsce w kodzie:** `#hero`, `<img>` wewnątrz `div.aspect-[3/4].rounded-t-[3rem]`
+**Proporcje:** pionowe 3:4, zaokrąglone górne rogi
+**Rola:** centralny "hero shot" — odpowiednik honey-bear bottle z oryginału, tu: torebka/ziarna kawy.
 
-### Midjourney — desktop (pionowy, 4:5)
+### Midjourney — desktop i mobile (pionowy, 3:4)
 ```
-Overhead shot of three hands clinking specialty coffee cups together in a warm celebration
-toast, latte art visible in two cups, one glass of cold brew, rustic wooden table,
-terracotta and ivory ceramic cups, soft directional morning sunlight from a side window,
-shallow depth of field, warm amber and burnt orange color grading, artisanal coffee roastery
-atmosphere, editorial food photography, shot on Hasselblad, 90mm macro lens, ultra
-realistic, natural film grain --ar 4:5 --style raw --v 6
-```
-
-### Midjourney — mobile (poziomy crop, 5:4)
-```
-Close-up overhead flat lay of specialty coffee cups being raised together in a toast,
-latte art detail, warm terracotta ceramic mugs on light oak wood table, soft natural
-window light, cozy specialty coffee shop mood, warm minimal color palette of terracotta,
-ivory and espresso brown, shallow focus, editorial product photography style,
-photorealistic --ar 5:4 --style raw --v 6
+Top-down macro shot of freshly roasted specialty coffee beans filling the frame edge to edge,
+rich glossy dark brown tones with warm amber highlights, single soft directional light from the
+top left, shallow depth of field on the front beans, ultra realistic texture, editorial product
+photography, shot on Hasselblad 90mm macro lens, warm terracotta and espresso color grading,
+photorealistic, natural film grain --ar 3:4 --style raw --v 6
 ```
 
-### Runway (Gen-3) — pętla wideo w tle hero
+### Runway (Gen-3) — subtelna pętla wideo (opcjonalna, w tle hero)
 ```
-Slow motion cinematic close-up of steam gently rising from a terracotta ceramic coffee cup
-on a wooden table, soft morning sunlight streaming from the left creating warm highlights,
-subtle dust particles floating in the light beam, shallow depth of field, camera performs
-a very slow, almost imperceptible push-in, warm ivory and terracotta color palette, cozy
-artisanal coffee roastery ambience, natural and calm, seamless loop, 4s duration,
-low motion intensity, photorealistic film look
+Extreme close-up macro of roasted coffee beans, camera performs an almost imperceptible slow
+push-in, warm directional light casting soft moving highlights across the glossy bean surface,
+tiny dust particles drifting, warm espresso and amber tones, calm and premium mood, seamless
+loop, 4s duration, very low motion intensity, photorealistic film look
 ```
 
 ---
 
-## 2. Sekcja WYRÓŻNIONY PRODUKT — "Etiopia Yirgacheffe"
+## 2. Sekcja "PROŚLEDŹ DROGĘ SWOJEJ KAWY" — zdjęcie pełnoekranowe (prawa kolumna)
 
-**Miejsce w kodzie:** `#produkt`, kontener `div.relative.aspect-[4/3]...`
-**Proporcje:** mobile `4:3` → `sm` `16:10` → `lg` `4:5` (pionowy, duży)
+**Miejsce w kodzie:** sekcja `#kawa`, prawa kolumna `div.aspect-[4/3]` (mobile) → pełna wysokość (desktop)
+**Proporcje:** mobile `4:3`, desktop pełna wysokość kolumny (ok. `3:4` do `4:5`)
 **Rola:** pokazanie procesu parzenia / rzemiosła — metoda przelewowa (pour-over).
 
 ### Midjourney — desktop (pionowy, 4:5)
 ```
-Barista's hands pouring hot water in slow spiral motion over a pour-over coffee dripper
-with a paper filter, glass Chemex-style carafe underneath, freshly ground specialty coffee
-bed visible, blooming crema, warm terracotta apron sleeve visible at frame edge, soft
-natural side lighting from a cafe window, blurred warm background with roasting equipment,
-rich espresso brown and terracotta tones, shallow depth of field, editorial coffee
-photography, photorealistic, shot on 50mm lens --ar 4:5 --style raw --v 6
+Barista's hands pouring hot water in a slow spiral over a pour-over coffee dripper with a paper
+filter, glass Chemex-style carafe underneath, freshly ground coffee bed blooming with crema,
+warm terracotta apron sleeve visible at the frame edge, soft natural window light from the side,
+blurred warm cafe interior in the background, rich espresso brown and terracotta tones, shallow
+depth of field, editorial coffee photography, photorealistic, 50mm lens --ar 4:5 --style raw --v 6
 ```
 
-### Midjourney — mobile (poziomy crop, 16:10)
+### Midjourney — mobile (poziomy, 4:3)
 ```
-Wide close-up of a pour-over coffee brewing setup, glass carafe and dripper on a wooden
-counter, gentle steam rising, warm golden hour light from the side, soft blurred cafe
-interior in the background with terracotta and ivory tones, minimal composition with
-generous negative space on the right side for text overlay, photorealistic editorial
-still life --ar 16:10 --style raw --v 6
-```
-
-### Runway (Gen-3) — pętla wideo procesu parzenia
-```
-Cinematic macro shot of hot water being poured in a slow circular motion over ground
-coffee in a pour-over filter, visible bloom and bubbling crema, warm steam rising, soft
-natural light from a window, camera holds a static, slightly low angle, shallow focus
-with soft bokeh background in terracotta and warm brown tones, calm and meditative pacing,
-seamless loop, 5s duration, medium motion intensity, photorealistic film look
+Close-up of a pour-over coffee brewing setup on a wooden counter, gentle steam rising, warm
+golden hour light from the side, softly blurred cafe interior in terracotta and ivory tones,
+minimal composition, photorealistic editorial still life --ar 4:3 --style raw --v 6
 ```
 
 ---
 
-## 3. Karty "Cechy / Zalety" (opcjonalne tło sekcji)
+## 3. Sekcja "PALARNIA NA ŻYWO" — pełnoekranowe zdjęcie ze scroll-zoomem
 
-**Miejsce w kodzie:** `#proces` / `#cechy`, tło sekcji za siatką kart (obecnie ikony SVG, bez zdjęcia)
-**Proporcje:** szerokie tło `21:9`, użyte jako bardzo subtelna, przyciemniona warstwa pod kartami (opcjonalnie).
+**Miejsce w kodzie:** `#palarnia`, `<img id="zoom-img">`
+**Proporcje:** pełna szerokość, wysokość `60vh` (mobile) / `85vh` (desktop)
+**Rola:** immersyjny, "żywy" kadr z palarni/kawiarni — w kodzie ma już nałożony efekt powiększania
+sterowany scrollem (JS), więc obraz źródłowy powinien mieć zapas kadru (nie kadrować zbyt ciasno).
 
-### Midjourney — szerokie tło sekcji
+### Midjourney — szerokie ujęcie sceny (16:9)
 ```
-Top-down flat lay of raw specialty coffee beans scattered across a warm terracotta linen
-surface, soft natural diffused light, minimal negative space, muted warm color palette of
-terracotta, ivory and espresso brown, very subtle shadows, clean minimal texture background
-for web design overlay, photorealistic, editorial still life --ar 21:9 --style raw --v 6
+Wide cinematic shot inside a warm specialty coffee roastery kitchen, barista pouring hot water
+over a pour-over dripper in the foreground, blurred roasting equipment and warm pendant lighting
+in the background, steam gently rising, terracotta and ivory color palette, golden hour ambiance,
+generous negative space around the subject for a scroll-triggered zoom crop, photorealistic,
+editorial documentary style --ar 16:9 --style raw --v 6
+```
+
+### Runway (Gen-3) — pętla wideo tła (alternatywa dla statycznego zoomu)
+```
+Cinematic medium shot inside a warm coffee roastery, barista slowly pouring hot water over a
+pour-over dripper, steam rising softly, warm golden pendant lighting, camera holds a slow,
+continuous slight push-in, shallow depth of field with soft bokeh in the background, calm and
+meditative pacing, terracotta and warm brown tones, seamless loop, 6s duration, medium motion
+intensity, photorealistic film look
 ```
 
 ---
 
-## 4. Wskazówki ogólne dla generacji
+## 4. Sekcja "PRAWDZIWA, UCZCIWA KAWA" — mała okrągła fotografia
+
+**Miejsce w kodzie:** sekcja CTA na tle `bg-rust`, `div.w-24.h-24.rounded-3xl`
+**Proporcje:** kwadrat 1:1, mocno zaokrąglone rogi
+**Rola:** mały, ozdobny akcent nad nagłówkiem — odpowiednik zdjęcia pszczoły na słoneczniku z oryginału.
+
+### Midjourney (kwadrat, 1:1)
+```
+Extreme close-up macro of ripe red coffee cherries on the branch, soft natural daylight, shallow
+depth of field with blurred green leaves in the background, vivid but natural color, dew drops
+visible on the cherry skin, warm and organic mood, photorealistic macro photography
+--ar 1:1 --style raw --v 6
+```
+
+---
+
+## 5. Karty karuzeli "Nasze Najlepsze Mieszanki" (opcjonalne zdjęcia zamiast ikon)
+
+**Miejsce w kodzie:** `#produkty`, `div.carousel-card` — obecnie kolorowe płytki z ikoną ziarna;
+opcjonalnie do zastąpienia realnymi zdjęciami produktowymi.
+**Proporcje:** kwadrat 1:1.
+
+### Midjourney — packshot produktowy (kwadrat, 1:1)
+```
+Minimalist product photography of a matte kraft coffee bag standing upright, small round window
+showing roasted beans inside, soft studio lighting, warm terracotta and ivory backdrop, subtle
+shadow beneath the bag, centered composition, clean commercial packshot style, photorealistic
+--ar 1:1 --style raw --v 6
+```
+
+---
+
+## 6. Wskazówki ogólne dla generacji
 
 - **Spójność świateł:** wszystkie grafiki powinny używać ciepłego, kierunkowego światła naturalnego
   (godzina złota / miękkie światło z okna), unikać zimnych, niebieskawych tonów.
 - **Paleta kolorów do promptów pomocniczych (jeśli model wspiera hex/color reference):**
-  `#E2725B` (terakota), `#FAF9F6` (kość słoniowa), `#2B1700` (espresso brąz).
+  `#E2725B` (terakota), `#FAF9F6` (kość słoniowa), `#2B1700` (espresso brąz), `#8B4530` (rdza).
 - **Format plików:** eksportuj z Midjourney w rozdzielczości min. 2000px szerokości, kompresuj do
   WebP przed wdrożeniem (`object-cover` w CSS obsłuży przycinanie do kontenera).
-- **Runway — długość i rozmiar:** dla tła hero i sekcji produktu wystarczą 4–5 sekundowe, bezszwowe
-  pętle (loop), eksport w 1080p, format MP4 (H.264) + WebM dla lepszej kompresji na mobile.
+- **Runway — długość i rozmiar:** dla sekcji "Palarnia na Żywo" i akcentów w tle wystarczą 4–6
+  sekundowe, bezszwowe pętle (loop), eksport w 1080p, format MP4 (H.264) + WebM na mobile.
 - **Dostępność:** dla finalnych wersji wideo dodaj `muted`, `playsinline`, `loop` oraz zachowaj
-  statyczny obraz `poster` (klatka z Midjourney) jako fallback dla wolniejszych łączy mobilnych.
+  statyczny obraz `poster` (klatka z Midjourney) jako fallback dla wolniejszych łączy mobilnych —
+  przyciski play/pause i wycisz w sekcji "Palarnia na Żywo" są już przygotowane w markupie.
