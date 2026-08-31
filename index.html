@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="pl" class="scroll-smooth">
+<html lang="pl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Batch No. 9 — Palarnia Kawy Specialty</title>
-<meta name="description" content="Batch No. 9 — rzemieślnicza palarnia kawy specialty. Małe partie, bezpośredni handel, świeże wypalanie co tydzień.">
+<title>Batch No. 9 — Poznaj Swoją Kawę</title>
+<meta name="description" content="Batch No. 9 — rzemieślnicza palarnia kawy specialty. Prawdziwa, uczciwa, w pełni śledzalna kawa — od plantacji po Twoją filiżankę.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
@@ -15,11 +15,12 @@
       extend: {
         colors: {
           ivory: '#FAF9F6',
-          terracotta: { DEFAULT: '#E2725B', dark: '#C65A44' },
+          terracotta: { DEFAULT: '#E2725B', dark: '#C65A44', light: '#E9B29F' },
+          rust: '#8B4530',
           espresso: '#2B1700',
         },
         fontFamily: {
-          display: ['Fraunces', 'serif'],
+          display: ['Rye', 'serif'],
           sans: ['Inter', 'sans-serif'],
         },
       },
@@ -27,340 +28,137 @@
   };
 </script>
 <style>
-  body { background-color: #FAF9F6; color: #2B1700; }
+  html { overflow-x: hidden; }
+  body { background-color: #FAF9F6; color: #2B1700; overflow-x: hidden; }
+
+  /* Layered "3D" vintage-sign heading effect, tuned per background context */
+  .text-3d { text-shadow: 0.05em 0.05em 0 var(--ts1), 0.1em 0.1em 0 var(--ts2); }
+  .on-espresso { --ts1: #6b4527; --ts2: #472c16; }
+  .on-ivory { --ts1: #E9B29F; --ts2: #E2725B; }
+  .on-terracotta { --ts1: #2B1700; --ts2: #472c16; }
+  .on-terracotta-light { --ts1: #C65A44; --ts2: #8B4530; }
+  .on-rust { --ts1: #5c2b1c; --ts2: #2B1700; }
+
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.is-visible { opacity: 1; transform: translateY(0); }
-  .nav-link { position: relative; }
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    left: 0; bottom: -4px;
-    width: 0; height: 1px;
-    background-color: #E2725B;
-    transition: width 0.3s ease;
+
+  /* Marquee ticker */
+  .marquee-track { display: flex; width: max-content; animation: marquee 20s linear infinite; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* Decorative flying bean */
+  .bean-float { animation: bean-float 3.5s ease-in-out infinite; }
+  @keyframes bean-float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(6px, -10px) rotate(12deg); }
   }
-  .nav-link:hover::after { width: 100%; }
+
+  /* Preloader */
+  #preloader {
+    position: fixed; inset: 0; z-index: 100;
+    background-color: #E2725B; color: #FAF9F6;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+  }
+  #preloader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+  #preloader-bean {
+    animation: preloader-path 1.8s ease-in-out infinite;
+  }
+  @keyframes preloader-path {
+    0% { transform: translateX(-90px) translateY(0) rotate(-10deg); }
+    25% { transform: translateX(-30px) translateY(-16px) rotate(10deg); }
+    50% { transform: translateX(30px) translateY(0) rotate(-10deg); }
+    75% { transform: translateX(70px) translateY(-16px) rotate(10deg); }
+    100% { transform: translateX(110px) translateY(0) rotate(-10deg); }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .reveal { transition: none; opacity: 1; transform: none; }
+    .marquee-track, .bean-float, #preloader-bean { animation: none; }
   }
 </style>
 </head>
-<body class="font-sans text-espresso bg-ivory antialiased overflow-x-hidden">
+<body class="font-sans text-espresso bg-ivory antialiased">
+
+<!-- ===== PRELOADER ===== -->
+<div id="preloader" aria-hidden="true">
+  <p class="text-xs sm:text-sm font-semibold uppercase tracking-[0.3em] mb-10">Parzenie się rozpoczyna&hellip;</p>
+  <div class="relative w-48 sm:w-64 h-10 flex items-center justify-center mb-10">
+    <svg id="preloader-bean" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="13" cy="13" rx="11" ry="8" transform="rotate(-40 13 13)" fill="#2B1700"/>
+      <path d="M6 17c3-5 4-9 3-13" stroke="#FAF9F6" stroke-width="1.4" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <p id="preloader-pct" class="font-display text-4xl sm:text-5xl leading-none">0%</p>
+  <p class="mt-4 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-ivory/80">Przygotuj się na prawdziwą, uczciwą kawę&trade;.</p>
+</div>
 
 <!-- ===== HEADER / NAV ===== -->
-<header id="top" class="fixed top-0 inset-x-0 z-50 bg-ivory/90 backdrop-blur-sm border-b border-espresso/10">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
-    <div class="flex items-center justify-between h-16 md:h-20">
-      <!-- Logo -->
-      <a href="#top" class="flex items-center gap-2 shrink-0" aria-label="Batch No. 9 - strona główna">
-        <svg width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="20" cy="20" r="19" stroke="#2B1700" stroke-width="1.5"/>
-          <path d="M20 10c-4 4-6 7-6 11a6 6 0 0 0 12 0c0-4-2-7-6-11Z" stroke="#E2725B" stroke-width="1.5" fill="none"/>
-          <line x1="20" y1="17" x2="20" y2="27" stroke="#E2725B" stroke-width="1.2"/>
-        </svg>
-        <span class="font-display text-lg md:text-xl tracking-tight leading-none">
-          Batch <span class="text-terracotta">No. 9</span>
-        </span>
-      </a>
-
-      <!-- Desktop nav -->
-      <nav class="hidden md:flex items-center gap-9 font-sans text-sm font-medium">
-        <a href="#produkt" class="nav-link">Kawy</a>
-        <a href="#proces" class="nav-link">Proces Wypalania</a>
-        <a href="#cechy" class="nav-link">O Nas</a>
-        <a href="#stopka" class="nav-link">Kontakt</a>
+<header id="top" class="relative bg-espresso text-ivory">
+  <div class="max-w-[1800px] mx-auto px-5 sm:px-8 lg:px-10">
+    <div class="flex items-center justify-between h-20 md:h-24">
+      <!-- Desktop nav left -->
+      <nav class="hidden md:flex items-center gap-8 text-xs font-semibold uppercase tracking-widest">
+        <a href="#kawa" class="hover:text-terracotta-light transition-colors">Śledź Kawę</a>
+        <a href="#produkty" class="hover:text-terracotta-light transition-colors">Produkty</a>
+        <a href="#palarnia" class="hover:text-terracotta-light transition-colors">Palarnia na Żywo</a>
       </nav>
 
-      <div class="hidden md:flex items-center">
-        <a href="#produkt" class="inline-flex items-center justify-center rounded-full bg-terracotta hover:bg-terracotta-dark text-ivory text-sm font-semibold px-6 py-2.5 transition-colors duration-300">
-          Zamów świeżą kawę
-        </a>
-      </div>
+      <!-- Logo badge -->
+      <a href="#top" class="absolute left-1/2 -translate-x-1/2 flex items-center" aria-label="Batch No. 9 - strona główna">
+        <svg width="150" height="52" viewBox="0 0 150 52" class="sm:w-[170px]" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 10 L144 10 L138 26 L144 42 L6 42 L12 26 Z" fill="#EDE6D6" stroke="#2B1700" stroke-width="1.5"/>
+          <text x="75" y="31" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="15" fill="#2B1700" letter-spacing="0.5">BATCH No.9</text>
+        </svg>
+      </a>
+
+      <!-- Desktop nav right -->
+      <nav class="hidden md:flex items-center gap-8 text-xs font-semibold uppercase tracking-widest">
+        <a href="#onas" class="hover:text-terracotta-light transition-colors">O Nas</a>
+        <a href="#przepisy" class="hover:text-terracotta-light transition-colors">Przepisy</a>
+        <a href="#gdziekupic" class="hover:text-terracotta-light transition-colors">Gdzie Kupić</a>
+      </nav>
 
       <!-- Mobile menu button -->
-      <button id="menu-btn" aria-label="Otwórz menu" aria-expanded="false" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-espresso/15">
-        <svg id="icon-open" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#2B1700" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-        <svg id="icon-close" class="w-5 h-5 hidden" viewBox="0 0 24 24" fill="none" stroke="#2B1700" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      <button id="menu-btn" aria-label="Otwórz menu" aria-expanded="false" class="md:hidden ml-auto inline-flex items-center justify-center w-10 h-10 rounded-full border border-ivory/25">
+        <svg id="icon-open" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#FAF9F6" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        <svg id="icon-close" class="w-5 h-5 hidden" viewBox="0 0 24 24" fill="none" stroke="#FAF9F6" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
     </div>
   </div>
 
   <!-- Mobile menu panel -->
-  <div id="mobile-menu" class="md:hidden hidden border-t border-espresso/10 bg-ivory">
-    <nav class="flex flex-col px-5 py-4 gap-1 font-medium text-base">
-      <a href="#produkt" class="py-2.5">Kawy</a>
-      <a href="#proces" class="py-2.5">Proces Wypalania</a>
-      <a href="#cechy" class="py-2.5">O Nas</a>
-      <a href="#stopka" class="py-2.5">Kontakt</a>
-      <a href="#produkt" class="mt-2 inline-flex items-center justify-center rounded-full bg-terracotta text-ivory text-sm font-semibold px-6 py-3">
-        Zamów świeżą kawę
-      </a>
+  <div id="mobile-menu" class="md:hidden hidden border-t border-ivory/10 bg-espresso">
+    <nav class="flex flex-col px-5 py-4 gap-1 text-sm font-semibold uppercase tracking-widest">
+      <a href="#kawa" class="py-2.5">Śledź Kawę</a>
+      <a href="#produkty" class="py-2.5">Produkty</a>
+      <a href="#palarnia" class="py-2.5">Palarnia na Żywo</a>
+      <a href="#onas" class="py-2.5">O Nas</a>
+      <a href="#przepisy" class="py-2.5">Przepisy</a>
+      <a href="#gdziekupic" class="py-2.5">Gdzie Kupić</a>
     </nav>
   </div>
 </header>
 
 <main>
-
-<!-- ===== HERO ===== -->
-<section id="hero" class="relative pt-28 pb-16 md:pt-40 md:pb-24 lg:pt-48 lg:pb-32 overflow-hidden">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-10 items-center">
-      <!-- Text -->
-      <div class="reveal max-w-xl">
-        <span class="inline-flex items-center gap-2 rounded-full bg-terracotta/10 text-terracotta text-xs font-semibold uppercase tracking-wider px-4 py-1.5 mb-6">
-          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-          Świeżo wypalane w tym tygodniu
-        </span>
-        <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl leading-[1.05] tracking-tight text-espresso">
-          Rzemieślnicza kawa <span class="text-terracotta italic">specialty</span>, wypalana małymi partiami.
-        </h1>
-        <p class="mt-6 text-base sm:text-lg text-espresso/70 leading-relaxed">
-          Batch No. 9 to lokalna palarnia kawy specialty. Każdą partię wypalamy ręcznie, w mikro-ilościach,
-          by uchwycić pełnię smaku prosto od plantatora do Twojej filiżanki.
-        </p>
-        <div class="mt-9 flex flex-col sm:flex-row gap-4">
-          <a href="#produkt" class="inline-flex items-center justify-center rounded-full bg-terracotta hover:bg-terracotta-dark text-ivory font-semibold px-8 py-3.5 transition-colors duration-300 shadow-lg shadow-terracotta/20">
-            Zamów świeżą kawę
-          </a>
-          <a href="#proces" class="inline-flex items-center justify-center gap-2 rounded-full border border-espresso/20 hover:border-espresso/40 font-semibold px-8 py-3.5 transition-colors duration-300">
-            Poznaj nasz proces
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-        </div>
-        <div class="mt-10 flex items-center gap-6 text-sm text-espresso/60">
-          <div class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-terracotta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 7l-9 9-5-5"/></svg>
-            Bezpośredni handel
-          </div>
-          <div class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-terracotta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 7l-9 9-5-5"/></svg>
-            Wysyłka w 48h
-          </div>
-        </div>
-      </div>
-
-      <!-- Image -->
-      <div class="reveal relative">
-        <div class="relative aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5] rounded-[2rem] overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=1400&auto=format&fit=crop"
-               alt="Świeżo wypalane ziarna kawy specialty Batch No. 9"
-               class="w-full h-full object-cover" loading="eager">
-        </div>
-        <div class="absolute -bottom-6 -left-6 hidden sm:block bg-ivory rounded-2xl shadow-xl px-5 py-4 border border-espresso/10">
-          <p class="font-display text-2xl text-terracotta leading-none">9kg</p>
-          <p class="text-xs text-espresso/60 mt-1">na jeden batch wypalania</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== WYRÓŻNIONY PRODUKT ===== -->
-<section id="produkt" class="scroll-mt-20 py-16 md:py-24 lg:py-32 bg-espresso/[0.03]">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-      <!-- Image -->
-      <div class="reveal order-2 lg:order-1 relative">
-        <div class="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5] rounded-[2rem] overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=1400&auto=format&fit=crop"
-               alt="Parzenie kawy specialty Etiopia Yirgacheffe Batch No. 9"
-               class="w-full h-full object-cover" loading="lazy">
-        </div>
-      </div>
-
-      <!-- Text -->
-      <div class="reveal order-1 lg:order-2 max-w-xl">
-        <p class="text-terracotta text-sm font-semibold uppercase tracking-wider mb-3">Ziarno miesiąca</p>
-        <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl leading-tight tracking-tight">
-          Etiopia Yirgacheffe
-        </h2>
-        <p class="mt-5 text-espresso/70 leading-relaxed">
-          Kwiatowy aromat jaśminu, nuty dojrzałej brzoskwini i bergamotki oraz delikatna słodycz trzciny cukrowej —
-          to nasza flagowa mieszanka, wypalana w profilu jasnym z myślą o metodach przelewowych.
-        </p>
-
-        <dl class="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 text-sm border-t border-espresso/10 pt-8">
-          <div>
-            <dt class="text-espresso/50 uppercase tracking-wide text-xs mb-1">Wysokość uprawy</dt>
-            <dd class="font-medium">1 900–2 100 m n.p.m.</dd>
-          </div>
-          <div>
-            <dt class="text-espresso/50 uppercase tracking-wide text-xs mb-1">Obróbka</dt>
-            <dd class="font-medium">Myta (washed)</dd>
-          </div>
-          <div>
-            <dt class="text-espresso/50 uppercase tracking-wide text-xs mb-1">Profil wypalania</dt>
-            <dd class="font-medium">Jasny, filtr</dd>
-          </div>
-          <div>
-            <dt class="text-espresso/50 uppercase tracking-wide text-xs mb-1">Data wypalania</dt>
-            <dd class="font-medium">Co poniedziałek</dd>
-          </div>
-        </dl>
-
-        <div class="mt-9 flex items-center justify-between gap-6 flex-wrap">
-          <p class="font-display text-3xl text-espresso">62 zł <span class="text-base font-sans text-espresso/50">/ 250 g</span></p>
-          <a href="#" class="inline-flex items-center justify-center gap-2 rounded-full bg-terracotta hover:bg-terracotta-dark text-ivory font-semibold px-8 py-3.5 transition-colors duration-300">
-            Dodaj do koszyka
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12L5 3H2"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== CECHY / ZALETY ===== -->
-<section id="proces" class="scroll-mt-20 py-16 md:py-24 lg:py-32">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
-    <div id="cechy" class="scroll-mt-20 max-w-2xl mx-auto text-center reveal">
-      <p class="text-terracotta text-sm font-semibold uppercase tracking-wider mb-3">Nasz proces</p>
-      <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl leading-tight tracking-tight">
-        Od plantacji po Twoją filiżankę
-      </h2>
-      <p class="mt-5 text-espresso/70 leading-relaxed">
-        Cztery zasady, których trzymamy się przy każdym batchu — bez kompromisów w jakości i relacjach z rolnikami.
-      </p>
-    </div>
-
-    <div class="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-      <!-- card 1 -->
-      <div class="reveal bg-ivory border border-espresso/10 rounded-3xl p-7 hover:border-terracotta/40 hover:-translate-y-1 transition-all duration-300">
-        <div class="w-12 h-12 rounded-2xl bg-terracotta/10 flex items-center justify-center mb-5">
-          <svg class="w-6 h-6 text-terracotta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-7 7 7v11M9 21v-6h6v6"/></svg>
-        </div>
-        <h3 class="font-display text-xl mb-2">Bezpośredni handel</h3>
-        <p class="text-sm text-espresso/65 leading-relaxed">Kupujemy ziarno wprost od plantatorów, płacąc ceny znacznie powyżej stawek Fair Trade.</p>
-      </div>
-      <!-- card 2 -->
-      <div class="reveal bg-ivory border border-espresso/10 rounded-3xl p-7 hover:border-terracotta/40 hover:-translate-y-1 transition-all duration-300">
-        <div class="w-12 h-12 rounded-2xl bg-terracotta/10 flex items-center justify-center mb-5">
-          <svg class="w-6 h-6 text-terracotta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-        </div>
-        <h3 class="font-display text-xl mb-2">Małe partie</h3>
-        <p class="text-sm text-espresso/65 leading-relaxed">Wypalamy zaledwie po 9 kg naraz, by zachować pełną kontrolę nad profilem smaku.</p>
-      </div>
-      <!-- card 3 -->
-      <div class="reveal bg-ivory border border-espresso/10 rounded-3xl p-7 hover:border-terracotta/40 hover:-translate-y-1 transition-all duration-300">
-        <div class="w-12 h-12 rounded-2xl bg-terracotta/10 flex items-center justify-center mb-5">
-          <svg class="w-6 h-6 text-terracotta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>
-        </div>
-        <h3 class="font-display text-xl mb-2">Świeżość gwarantowana</h3>
-        <p class="text-sm text-espresso/65 leading-relaxed">Wysyłka w ciągu 48h od wypalenia — kawa dociera w szczycie swojej aromatycznej formy.</p>
-      </div>
-      <!-- card 4 -->
-      <div class="reveal bg-ivory border border-espresso/10 rounded-3xl p-7 hover:border-terracotta/40 hover:-translate-y-1 transition-all duration-300">
-        <div class="w-12 h-12 rounded-2xl bg-terracotta/10 flex items-center justify-center mb-5">
-          <svg class="w-6 h-6 text-terracotta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h9l5 5v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
-        </div>
-        <h3 class="font-display text-xl mb-2">Warsztaty parzenia</h3>
-        <p class="text-sm text-espresso/65 leading-relaxed">Cotygodniowe cuppingi i warsztaty — uczymy, jak wydobyć z ziarna najlepszy smak.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 </main>
 
-<!-- ===== FOOTER ===== -->
-<footer id="stopka" class="scroll-mt-20 bg-espresso text-ivory">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-16 md:py-20">
-    <div class="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] gap-12">
-      <div class="reveal max-w-sm">
-        <a href="#top" class="flex items-center gap-2 mb-5">
-          <svg width="34" height="34" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="20" cy="20" r="19" stroke="#FAF9F6" stroke-width="1.5"/>
-            <path d="M20 10c-4 4-6 7-6 11a6 6 0 0 0 12 0c0-4-2-7-6-11Z" stroke="#E2725B" stroke-width="1.5" fill="none"/>
-            <line x1="20" y1="17" x2="20" y2="27" stroke="#E2725B" stroke-width="1.2"/>
-          </svg>
-          <span class="font-display text-lg tracking-tight">Batch <span class="text-terracotta">No. 9</span></span>
-        </a>
-        <p class="text-ivory/60 text-sm leading-relaxed">
-          Wypalane z pasją od pierwszego batcha. Lokalna palarnia kawy specialty — małe partie, wielki smak.
-        </p>
-        <div class="flex items-center gap-3 mt-6">
-          <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full border border-ivory/20 flex items-center justify-center hover:bg-terracotta hover:border-terracotta transition-colors duration-300">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
-          </a>
-          <a href="#" aria-label="Facebook" class="w-10 h-10 rounded-full border border-ivory/20 flex items-center justify-center hover:bg-terracotta hover:border-terracotta transition-colors duration-300">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 8h2V5h-2a4 4 0 0 0-4 4v2H9v3h2v7h3v-7h2.5l.5-3H14V9a1 1 0 0 1 1-1Z"/></svg>
-          </a>
-          <a href="#" aria-label="X" class="w-10 h-10 rounded-full border border-ivory/20 flex items-center justify-center hover:bg-terracotta hover:border-terracotta transition-colors duration-300">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4l16 16M20 4 4 20"/></svg>
-          </a>
-        </div>
-      </div>
-
-      <div class="reveal">
-        <h4 class="font-semibold text-sm uppercase tracking-wider text-ivory/50 mb-4">Sklep</h4>
-        <ul class="space-y-3 text-sm text-ivory/80">
-          <li><a href="#produkt" class="hover:text-terracotta transition-colors">Kawy</a></li>
-          <li><a href="#" class="hover:text-terracotta transition-colors">Akcesoria</a></li>
-          <li><a href="#" class="hover:text-terracotta transition-colors">Zestawy prezentowe</a></li>
-        </ul>
-      </div>
-
-      <div class="reveal">
-        <h4 class="font-semibold text-sm uppercase tracking-wider text-ivory/50 mb-4">Firma</h4>
-        <ul class="space-y-3 text-sm text-ivory/80">
-          <li><a href="#cechy" class="hover:text-terracotta transition-colors">O nas</a></li>
-          <li><a href="#proces" class="hover:text-terracotta transition-colors">Proces wypalania</a></li>
-          <li><a href="#" class="hover:text-terracotta transition-colors">Kariera</a></li>
-        </ul>
-      </div>
-
-      <div class="reveal max-w-sm">
-        <h4 class="font-semibold text-sm uppercase tracking-wider text-ivory/50 mb-4">Bądź na bieżąco</h4>
-        <p class="text-sm text-ivory/60 mb-4">Nowości, świeże batche i zaproszenia na cuppingi — prosto na Twoją skrzynkę.</p>
-        <form class="flex gap-2" onsubmit="return false;">
-          <input type="email" required placeholder="Twój e-mail" class="min-w-0 flex-1 rounded-full bg-ivory/10 border border-ivory/20 px-4 py-2.5 text-sm placeholder:text-ivory/40 focus:outline-none focus:border-terracotta">
-          <button type="submit" class="shrink-0 rounded-full bg-terracotta hover:bg-terracotta-dark px-5 py-2.5 text-sm font-semibold transition-colors duration-300">Zapisz się</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="mt-14 pt-8 border-t border-ivory/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ivory/50">
-      <p>© 2026 Batch No. 9. Wszelkie prawa zastrzeżone.</p>
-      <div class="flex items-center gap-6">
-        <a href="#" class="hover:text-terracotta transition-colors">Polityka prywatności</a>
-        <a href="#" class="hover:text-terracotta transition-colors">Regulamin</a>
-      </div>
-    </div>
-  </div>
-</footer>
-
 <script>
-  // Mobile menu toggle
-  const menuBtn = document.getElementById('menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const iconOpen = document.getElementById('icon-open');
-  const iconClose = document.getElementById('icon-close');
-  menuBtn.addEventListener('click', () => {
-    const isOpen = !mobileMenu.classList.contains('hidden');
-    mobileMenu.classList.toggle('hidden');
-    iconOpen.classList.toggle('hidden');
-    iconClose.classList.toggle('hidden');
-    menuBtn.setAttribute('aria-expanded', String(!isOpen));
-  });
-  mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.add('hidden');
-      iconOpen.classList.remove('hidden');
-      iconClose.classList.add('hidden');
-    });
-  });
-
-  // Scroll reveal animation
-  const revealEls = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
+  // Preloader counter
+  (function () {
+    const preloader = document.getElementById('preloader');
+    const pct = document.getElementById('preloader-pct');
+    let value = 0;
+    const timer = setInterval(() => {
+      value += Math.ceil(Math.random() * 18) + 4;
+      if (value >= 100) {
+        value = 100;
+        clearInterval(timer);
+        setTimeout(() => preloader.classList.add('hidden'), 300);
       }
-    });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-  revealEls.forEach(el => observer.observe(el));
+      pct.textContent = value + '%';
+    }, 140);
+  })();
 </script>
 
 </body>
