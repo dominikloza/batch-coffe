@@ -293,6 +293,42 @@
   </div>
 </section>
 
+<!-- ===== PALARNIA NA ŻYWO (scroll-zoom lifestyle) ===== -->
+<section id="palarnia" class="scroll-mt-20 relative h-[60vh] sm:h-[85vh] overflow-hidden">
+  <img id="zoom-img" src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=1800&auto=format&fit=crop"
+       alt="Parzenie kawy metodą przelewową w palarni Batch No. 9"
+       class="absolute inset-0 w-full h-full object-cover" style="transform: scale(1); transition: transform 0.05s linear;">
+  <div class="absolute inset-0 bg-espresso/10"></div>
+  <div class="absolute bottom-5 right-5 flex items-center gap-2">
+    <button id="zoom-play" aria-label="Wstrzymaj / wznów" class="w-10 h-10 rounded-full bg-espresso/70 text-ivory flex items-center justify-center backdrop-blur-sm">
+      <svg id="icon-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="5" y="4" width="5" height="16" rx="1"/><rect x="14" y="4" width="5" height="16" rx="1"/></svg>
+      <svg id="icon-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" class="hidden"><path d="M6 4l14 8-14 8V4z"/></svg>
+    </button>
+    <button id="zoom-mute" aria-label="Wycisz / włącz dźwięk" class="w-10 h-10 rounded-full bg-espresso/70 text-ivory flex items-center justify-center backdrop-blur-sm">
+      <svg id="icon-mute-on" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><line x1="16" y1="9" x2="21" y2="15"/><line x1="21" y1="9" x2="16" y2="15"/></svg>
+      <svg id="icon-mute-off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="hidden"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- ===== PRAWDZIWA, UCZCIWA KAWA (CTA) ===== -->
+<section class="bg-rust text-ivory py-16 sm:py-24 px-5">
+  <div class="reveal max-w-2xl mx-auto flex flex-col items-center text-center">
+    <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl overflow-hidden mb-8 ring-4 ring-ivory/10">
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=400&auto=format&fit=crop"
+           alt="Świeżo palone ziarna kawy Batch No. 9" class="w-full h-full object-cover">
+    </div>
+    <p class="text-xs font-semibold uppercase tracking-widest text-ivory/70 mb-4">Od ziarna w dłoni rolnika do Twojego domu</p>
+    <h2 class="text-3d on-rust font-display text-4xl sm:text-5xl lg:text-6xl leading-[0.95]">
+      PRAWDZIWA, UCZCIWA KAWA<br>WPROST Z PLANTACJI
+    </h2>
+    <a href="#" class="mt-9 inline-flex items-center gap-2 rounded-full bg-terracotta-light text-espresso text-sm font-semibold uppercase tracking-wide px-7 py-3.5 hover:brightness-95 transition-all">
+      Dowiedz się więcej
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</section>
+
 </main>
 
 <script>
@@ -378,6 +414,47 @@
       const next = (active + 1) % cards.length;
       cards[next].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     }, 3200);
+  })();
+
+  // Scroll-linked zoom on the "Palarnia na żywo" lifestyle image
+  (function () {
+    const section = document.getElementById('palarnia');
+    const img = document.getElementById('zoom-img');
+    if (!section || !img) return;
+    let playing = true;
+
+    function updateZoom() {
+      if (!playing) return;
+      const rect = section.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const total = rect.height + vh;
+      const progressed = vh - rect.top;
+      const progress = Math.min(Math.max(progressed / total, 0), 1);
+      img.style.transform = `scale(${1 + progress * 0.3})`;
+    }
+    updateZoom();
+    window.addEventListener('scroll', updateZoom, { passive: true });
+    window.addEventListener('resize', updateZoom);
+
+    const playBtn = document.getElementById('zoom-play');
+    const iconPlay = document.getElementById('icon-play');
+    const iconPause = document.getElementById('icon-pause');
+    playBtn.addEventListener('click', () => {
+      playing = !playing;
+      iconPlay.classList.toggle('hidden', playing);
+      iconPause.classList.toggle('hidden', !playing);
+      if (playing) updateZoom();
+    });
+
+    const muteBtn = document.getElementById('zoom-mute');
+    const muteOn = document.getElementById('icon-mute-on');
+    const muteOff = document.getElementById('icon-mute-off');
+    let muted = true;
+    muteBtn.addEventListener('click', () => {
+      muted = !muted;
+      muteOn.classList.toggle('hidden', muted);
+      muteOff.classList.toggle('hidden', !muted);
+    });
   })();
 
   // Scroll reveal animation
