@@ -189,8 +189,8 @@
 <main>
 
 <!-- ===== HERO ===== -->
-<section id="hero" class="relative min-h-screen flex flex-col justify-center bg-espresso text-ivory pb-0 overflow-hidden">
-  <div class="relative z-0 max-w-[1800px] mx-auto px-5 sm:px-8 lg:px-10 pt-8 sm:pt-14 pb-8">
+<section id="hero" class="relative min-h-screen flex flex-col justify-start bg-espresso text-ivory pb-0 overflow-hidden">
+  <div class="relative z-0 max-w-[1800px] mx-auto px-5 sm:px-8 lg:px-10 pt-8 sm:pt-14 pb-8 md:pt-20">
     <h1 class="font-display text-center leading-[0.95] tracking-wide text-[15vw] sm:text-[10vw] lg:text-[6.3vw] whitespace-normal">
       <span class="hero-word inline-block">POZNAJ</span><br class="sm:hidden"> <span class="hero-word inline-block" style="transition-delay:0.13s">SWOJĄ</span><br class="sm:hidden"> <span class="hero-word inline-block" style="transition-delay:0.26s">KAWĘ</span>
     </h1>
@@ -544,12 +544,27 @@
     });
   }
 
-  // Products carousel: auto-advance + dot sync
+  // Products carousel: auto-advance + dot sync, looping infinitely
   (function () {
     const carousel = document.getElementById('carousel');
     if (!carousel) return;
     const cards = Array.from(carousel.querySelectorAll('.carousel-card'));
     const dots = Array.from(document.querySelectorAll('.carousel-dot'));
+
+    // Append a cloned copy of the whole set right after the real cards, so
+    // auto-advance always has something identical-looking ahead to scroll
+    // into - it never has to visibly reverse direction to "restart" the
+    // loop. Once scrolled a full set-width in, we silently rewind by that
+    // same width (no animation) - since the clone is pixel-identical to the
+    // real card at that position, the jump is invisible.
+    const clones = cards.map((card) => {
+      const clone = card.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.querySelectorAll('a').forEach((a) => a.setAttribute('tabindex', '-1'));
+      carousel.appendChild(clone);
+      return clone;
+    });
+
     let active = 0;
 
     function setActive(i) {
@@ -563,6 +578,10 @@
     }
     setActive(0);
 
+    function setWidth() {
+      return clones[0].offsetLeft - cards[0].offsetLeft;
+    }
+
     // Scrolls only the carousel's own horizontal axis (never the page) by targeting
     // scrollLeft directly instead of scrollIntoView, which also scrolls ancestor
     // containers - including the page itself - into view vertically.
@@ -572,13 +591,8 @@
     // land on one gets silently pulled back to the nearest real snap point by
     // the browser right after our scrollTo - which is what made the carousel
     // look "stuck" no matter what index we asked for.
-    function maxScroll() {
-      return carousel.scrollWidth - carousel.clientWidth;
-    }
-
     function scrollToCard(i) {
-      const card = cards[i];
-      const left = Math.min(maxScroll(), card.offsetLeft);
+      const left = Math.min(carousel.scrollWidth - carousel.clientWidth, cards[i].offsetLeft);
       carousel.scrollTo({ left, behavior: 'smooth' });
       setActive(i);
     }
@@ -591,7 +605,8 @@
     carousel.addEventListener('scroll', () => {
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
-        const target = carousel.scrollLeft;
+        const sw = setWidth();
+        const target = ((carousel.scrollLeft % sw) + sw) % sw;
         let closest = 0;
         let closestDist = Infinity;
         cards.forEach((card, i) => {
@@ -602,20 +617,22 @@
       }, 100);
     });
 
-    // Steps forward by one card width instead of jumping to an absolute per-card
-    // offset: once cards are wide enough that most of the row already fits on
-    // screen, several of those absolute targets clamp to the same max scroll
-    // position, so index-based advancing stalls/jitters. A relative step plus
-    // wraparound (back to card 0's own snap point, not scrollLeft 0) keeps
-    // advancing smooth regardless of how much scroll range actually exists at
-    // the current viewport width.
+    // Steps forward by one card width each tick. Once past a full set-width,
+    // rewind by that width first (instant, invisible) so there's always a
+    // full set of real-or-clone cards ahead to scroll smoothly into - a true
+    // loop instead of snapping backwards once it runs out of cards.
     setInterval(() => {
-      const max = maxScroll();
-      if (max <= 4) return; // whole row already fits - nothing to advance
+      const sw = setWidth();
+      if (sw <= 4) return; // whole row already fits - nothing to advance
       const gap = parseFloat(getComputedStyle(carousel).columnGap) || 16;
       const step = cards[0].offsetWidth + gap;
-      const next = carousel.scrollLeft + step > max - 4 ? cards[0].offsetLeft : carousel.scrollLeft + step;
-      carousel.scrollTo({ left: next, behavior: 'smooth' });
+      let current = carousel.scrollLeft;
+      if (current >= sw - 2) {
+        current -= sw;
+        carousel.scrollTo({ left: current, behavior: 'auto' });
+      }
+      carousel.scrollTo({ left: current + step, behavior: 'smooth' });
+      setActive((active + 1) % cards.length);
     }, 3200);
   })();
 
