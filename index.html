@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Batch No. 9 — Palarnia Kawy Specialty</title>
+<meta name="description" content="Batch No. 9 — rzemieślnicza palarnia kawy specialty. Małe partie, bezpośredni handel, świeże wypalanie co tydzień.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ivory: '#FAF9F6',
+          terracotta: { DEFAULT: '#E2725B', dark: '#C65A44' },
+          espresso: '#2B1700',
+        },
+        fontFamily: {
+          display: ['Fraunces', 'serif'],
+          sans: ['Inter', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+<style>
+  body { background-color: #FAF9F6; color: #2B1700; }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -4px;
+    width: 0; height: 1px;
+    background-color: #E2725B;
+    transition: width 0.3s ease;
+  }
+  .nav-link:hover::after { width: 100%; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { transition: none; opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body class="font-sans text-espresso bg-ivory antialiased overflow-x-hidden">
+
+<!-- ===== HEADER / NAV ===== -->
+<header id="top" class="fixed top-0 inset-x-0 z-50 bg-ivory/90 backdrop-blur-sm border-b border-espresso/10">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
+    <div class="flex items-center justify-between h-16 md:h-20">
+      <!-- Logo -->
+      <a href="#top" class="flex items-center gap-2 shrink-0" aria-label="Batch No. 9 - strona główna">
+        <svg width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="19" stroke="#2B1700" stroke-width="1.5"/>
+          <path d="M20 10c-4 4-6 7-6 11a6 6 0 0 0 12 0c0-4-2-7-6-11Z" stroke="#E2725B" stroke-width="1.5" fill="none"/>
+          <line x1="20" y1="17" x2="20" y2="27" stroke="#E2725B" stroke-width="1.2"/>
+        </svg>
+        <span class="font-display text-lg md:text-xl tracking-tight leading-none">
+          Batch <span class="text-terracotta">No. 9</span>
+        </span>
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-9 font-sans text-sm font-medium">
+        <a href="#produkt" class="nav-link">Kawy</a>
+        <a href="#proces" class="nav-link">Proces Wypalania</a>
+        <a href="#cechy" class="nav-link">O Nas</a>
+        <a href="#stopka" class="nav-link">Kontakt</a>
+      </nav>
+
+      <div class="hidden md:flex items-center">
+        <a href="#produkt" class="inline-flex items-center justify-center rounded-full bg-terracotta hover:bg-terracotta-dark text-ivory text-sm font-semibold px-6 py-2.5 transition-colors duration-300">
+          Zamów świeżą kawę
+        </a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <button id="menu-btn" aria-label="Otwórz menu" aria-expanded="false" class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full border border-espresso/15">
+        <svg id="icon-open" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#2B1700" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        <svg id="icon-close" class="w-5 h-5 hidden" viewBox="0 0 24 24" fill="none" stroke="#2B1700" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu panel -->
+  <div id="mobile-menu" class="md:hidden hidden border-t border-espresso/10 bg-ivory">
+    <nav class="flex flex-col px-5 py-4 gap-1 font-medium text-base">
+      <a href="#produkt" class="py-2.5">Kawy</a>
+      <a href="#proces" class="py-2.5">Proces Wypalania</a>
+      <a href="#cechy" class="py-2.5">O Nas</a>
+      <a href="#stopka" class="py-2.5">Kontakt</a>
+      <a href="#produkt" class="mt-2 inline-flex items-center justify-center rounded-full bg-terracotta text-ivory text-sm font-semibold px-6 py-3">
+        Zamów świeżą kawę
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main>
+</main>
+
+</body>
+</html>
