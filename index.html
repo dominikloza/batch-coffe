@@ -485,10 +485,18 @@
     }
     setActive(0);
 
+    // Scrolls only the carousel's own horizontal axis (never the page) by targeting
+    // scrollLeft directly instead of scrollIntoView, which also scrolls ancestor
+    // containers - including the page itself - into view vertically.
+    function scrollToCard(i) {
+      const card = cards[i];
+      const left = Math.max(0, card.offsetLeft - (carousel.clientWidth - card.offsetWidth) / 2);
+      carousel.scrollTo({ left, behavior: 'smooth' });
+      setActive(i);
+    }
+
     dots.forEach((dot, i) => {
-      dot.addEventListener('click', () => {
-        cards[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-      });
+      dot.addEventListener('click', () => scrollToCard(i));
     });
 
     let scrollTimeout;
@@ -508,7 +516,7 @@
 
     setInterval(() => {
       const next = (active + 1) % cards.length;
-      cards[next].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      scrollToCard(next);
     }, 3200);
   })();
 
