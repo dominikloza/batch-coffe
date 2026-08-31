@@ -7,7 +7,7 @@
 <meta name="description" content="Batch No. 9 — rzemieślnicza palarnia kawy specialty. Prawdziwa, uczciwa, w pełni śledzalna kawa — od plantacji po Twoją filiżankę.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bevan&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bevan&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
@@ -21,7 +21,7 @@
         },
         fontFamily: {
           display: ['Bevan', 'serif'],
-          sans: ['Lora', 'serif'],
+          sans: ['Inter', 'sans-serif'],
         },
       },
     },
@@ -127,10 +127,10 @@
           <circle cx="100" cy="100" r="96" fill="#EDE6D6" stroke="#2B1700" stroke-width="3"/>
           <circle cx="100" cy="100" r="87" fill="none" stroke="#2B1700" stroke-width="1.4"/>
 
-          <text font-family="Lora, serif" font-size="13" font-weight="700" letter-spacing="3" fill="#2B1700">
+          <text font-family="Inter, sans-serif" font-size="13" font-weight="700" letter-spacing="3" fill="#2B1700">
             <textPath href="#logoArcTop" startOffset="6%">EST.</textPath>
           </text>
-          <text font-family="Lora, serif" font-size="13" font-weight="700" letter-spacing="3" fill="#2B1700">
+          <text font-family="Inter, sans-serif" font-size="13" font-weight="700" letter-spacing="3" fill="#2B1700">
             <textPath href="#logoArcTop" startOffset="76%">2026</textPath>
           </text>
 
@@ -152,7 +152,7 @@
           <text x="100" y="115" text-anchor="middle" font-family="Bevan, serif" font-size="24" fill="#2B1700">BATCH</text>
           <text x="100" y="131" text-anchor="middle" font-family="Bevan, serif" font-size="14" fill="#2B1700">No. 9</text>
 
-          <text font-family="Lora, serif" font-size="9" font-weight="600" letter-spacing="1.5" fill="#2B1700">
+          <text font-family="Inter, sans-serif" font-size="9" font-weight="600" letter-spacing="1.5" fill="#2B1700">
             <textPath href="#logoArcBottom" startOffset="50%" text-anchor="middle">SPECIALTY COFFEE</textPath>
           </text>
         </svg>
@@ -189,7 +189,7 @@
 <main>
 
 <!-- ===== HERO ===== -->
-<section id="hero" class="relative bg-espresso text-ivory pb-0 overflow-hidden">
+<section id="hero" class="relative min-h-screen flex flex-col justify-center bg-espresso text-ivory pb-0 overflow-hidden">
   <div class="relative z-0 max-w-[1800px] mx-auto px-5 sm:px-8 lg:px-10 pt-8 sm:pt-14 pb-8">
     <h1 class="font-display text-center leading-[0.95] tracking-wide text-[15vw] sm:text-[10vw] lg:text-[6.3vw] whitespace-normal">
       <span class="hero-word inline-block">POZNAJ</span><br class="sm:hidden"> <span class="hero-word inline-block" style="transition-delay:0.13s">SWOJĄ</span><br class="sm:hidden"> <span class="hero-word inline-block" style="transition-delay:0.26s">KAWĘ</span>
@@ -258,7 +258,7 @@
         </defs>
         <circle cx="50" cy="50" r="48" fill="#E2725B"/>
         <text font-size="8.2" font-weight="700" letter-spacing="1.5" fill="#FAF9F6">
-          <textPath href="#circlePath" startOffset="0%">PALONE W MAŁEJ PARTII ·</textPath>
+          <textPath href="#circlePath" startOffset="0%">PALONE W MAŁEJ PATRTII &bigodot; PALONE W MAŁEJ PATRTII &bigodot;</textPath>
         </text>
       </svg>
       <svg class="absolute inset-0 m-auto" width="26" height="30" viewBox="0 0 24 28" fill="none">
@@ -298,9 +298,10 @@
     </a>
   </div>
 
-  <div id="carousel" class="reveal mt-14 w-screen relative left-1/2 -translate-x-1/2 flex gap-4 sm:gap-6 overflow-x-auto px-4 sm:px-8 pb-4 snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+  <div class="mt-14 w-screen relative left-1/2 -translate-x-1/2">
+  <div id="carousel" class="reveal flex gap-4 sm:gap-6 overflow-x-auto px-4 sm:px-8 pb-4 snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
     <!-- card 1 -->
-    <div class="carousel-card snap-center shrink-0 w-[70vw] sm:w-[40vw] lg:w-[26vw] flex flex-col items-center text-center">
+    <div class="carousel-card snap-start shrink-0 w-[62vw] sm:w-[36vw] md:w-[26vw] lg:w-[19vw] flex flex-col items-center text-center">
       <div class="w-full aspect-square rounded-3xl overflow-hidden mb-5">
         <img src="https://images.unsplash.com/photo-1599639932525-213272ff954b?q=80&w=500&auto=format&fit=crop" alt="Etiopia Yirgacheffe 250g" class="w-full h-full object-cover" loading="lazy">
       </div>
@@ -308,7 +309,7 @@
       <a href="#" class="mt-4 inline-flex items-center justify-center rounded-full border border-espresso/25 text-xs font-semibold uppercase tracking-widest px-6 py-2.5 hover:border-espresso transition-colors">Więcej</a>
     </div>
     <!-- card 2 -->
-    <div class="carousel-card snap-center shrink-0 w-[70vw] sm:w-[40vw] lg:w-[26vw] flex flex-col items-center text-center">
+    <div class="carousel-card snap-start shrink-0 w-[62vw] sm:w-[36vw] md:w-[26vw] lg:w-[19vw] flex flex-col items-center text-center">
       <div class="w-full aspect-square rounded-3xl overflow-hidden mb-5">
         <img src="https://images.unsplash.com/photo-1599637777203-34ac21aa929b?q=80&w=500&auto=format&fit=crop" alt="Kolumbia Huila 250g" class="w-full h-full object-cover" loading="lazy">
       </div>
@@ -316,7 +317,7 @@
       <a href="#" class="mt-4 inline-flex items-center justify-center rounded-full border border-espresso/25 text-xs font-semibold uppercase tracking-widest px-6 py-2.5 hover:border-espresso transition-colors">Więcej</a>
     </div>
     <!-- card 3 -->
-    <div class="carousel-card snap-center shrink-0 w-[70vw] sm:w-[40vw] lg:w-[26vw] flex flex-col items-center text-center">
+    <div class="carousel-card snap-start shrink-0 w-[62vw] sm:w-[36vw] md:w-[26vw] lg:w-[19vw] flex flex-col items-center text-center">
       <div class="w-full aspect-square rounded-3xl overflow-hidden mb-5">
         <img src="https://images.unsplash.com/photo-1599639957043-f3aa5c986398?q=80&w=500&auto=format&fit=crop" alt="Espresso Blend 1kg" class="w-full h-full object-cover" loading="lazy">
       </div>
@@ -324,7 +325,7 @@
       <a href="#" class="mt-4 inline-flex items-center justify-center rounded-full border border-espresso/25 text-xs font-semibold uppercase tracking-widest px-6 py-2.5 hover:border-espresso transition-colors">Więcej</a>
     </div>
     <!-- card 4 -->
-    <div class="carousel-card snap-center shrink-0 w-[70vw] sm:w-[40vw] lg:w-[26vw] flex flex-col items-center text-center">
+    <div class="carousel-card snap-start shrink-0 w-[62vw] sm:w-[36vw] md:w-[26vw] lg:w-[19vw] flex flex-col items-center text-center">
       <div class="w-full aspect-square rounded-3xl overflow-hidden mb-5">
         <img src="https://images.unsplash.com/photo-1712402832925-d41c446883d3?q=80&w=500&auto=format&fit=crop" alt="Brazylia Cerrado 250g" class="w-full h-full object-cover" loading="lazy">
       </div>
@@ -332,13 +333,14 @@
       <a href="#" class="mt-4 inline-flex items-center justify-center rounded-full border border-espresso/25 text-xs font-semibold uppercase tracking-widest px-6 py-2.5 hover:border-espresso transition-colors">Więcej</a>
     </div>
     <!-- card 5 -->
-    <div class="carousel-card snap-center shrink-0 w-[70vw] sm:w-[40vw] lg:w-[26vw] flex flex-col items-center text-center">
+    <div class="carousel-card snap-start shrink-0 w-[62vw] sm:w-[36vw] md:w-[26vw] lg:w-[19vw] flex flex-col items-center text-center">
       <div class="w-full aspect-square rounded-3xl overflow-hidden mb-5">
         <img src="https://images.unsplash.com/photo-1703646613751-ff7efcb76afa?q=80&w=500&auto=format&fit=crop" alt="Zestaw Degustacyjny 3×100g" class="w-full h-full object-cover" loading="lazy">
       </div>
       <p class="font-semibold text-sm uppercase tracking-wide">Zestaw Degustacyjny 3×100g</p>
       <a href="#" class="mt-4 inline-flex items-center justify-center rounded-full border border-espresso/25 text-xs font-semibold uppercase tracking-widest px-6 py-2.5 hover:border-espresso transition-colors">Więcej</a>
     </div>
+  </div>
   </div>
 
   <div class="relative flex items-center justify-center gap-3 mt-6">
@@ -564,9 +566,19 @@
     // Scrolls only the carousel's own horizontal axis (never the page) by targeting
     // scrollLeft directly instead of scrollIntoView, which also scrolls ancestor
     // containers - including the page itself - into view vertically.
+    // Targets each card's own offsetLeft (not offset by the container's padding):
+    // with snap-start and no explicit scroll-padding, the browser's native snap
+    // points sit exactly at each card's offsetLeft, so any target that doesn't
+    // land on one gets silently pulled back to the nearest real snap point by
+    // the browser right after our scrollTo - which is what made the carousel
+    // look "stuck" no matter what index we asked for.
+    function maxScroll() {
+      return carousel.scrollWidth - carousel.clientWidth;
+    }
+
     function scrollToCard(i) {
       const card = cards[i];
-      const left = Math.max(0, card.offsetLeft - (carousel.clientWidth - card.offsetWidth) / 2);
+      const left = Math.min(maxScroll(), card.offsetLeft);
       carousel.scrollTo({ left, behavior: 'smooth' });
       setActive(i);
     }
@@ -579,20 +591,31 @@
     carousel.addEventListener('scroll', () => {
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
-        const center = carousel.scrollLeft + carousel.clientWidth / 2;
+        const target = carousel.scrollLeft;
         let closest = 0;
         let closestDist = Infinity;
         cards.forEach((card, i) => {
-          const dist = Math.abs((card.offsetLeft + card.offsetWidth / 2) - center);
+          const dist = Math.abs(card.offsetLeft - target);
           if (dist < closestDist) { closestDist = dist; closest = i; }
         });
         setActive(closest);
       }, 100);
     });
 
+    // Steps forward by one card width instead of jumping to an absolute per-card
+    // offset: once cards are wide enough that most of the row already fits on
+    // screen, several of those absolute targets clamp to the same max scroll
+    // position, so index-based advancing stalls/jitters. A relative step plus
+    // wraparound (back to card 0's own snap point, not scrollLeft 0) keeps
+    // advancing smooth regardless of how much scroll range actually exists at
+    // the current viewport width.
     setInterval(() => {
-      const next = (active + 1) % cards.length;
-      scrollToCard(next);
+      const max = maxScroll();
+      if (max <= 4) return; // whole row already fits - nothing to advance
+      const gap = parseFloat(getComputedStyle(carousel).columnGap) || 16;
+      const step = cards[0].offsetWidth + gap;
+      const next = carousel.scrollLeft + step > max - 4 ? cards[0].offsetLeft : carousel.scrollLeft + step;
+      carousel.scrollTo({ left: next, behavior: 'smooth' });
     }, 3200);
   })();
 
