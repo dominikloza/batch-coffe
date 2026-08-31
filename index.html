@@ -7,7 +7,7 @@
 <meta name="description" content="Batch No. 9 — rzemieślnicza palarnia kawy specialty. Prawdziwa, uczciwa, w pełni śledzalna kawa — od plantacji po Twoją filiżankę.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bevan&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bevan&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
@@ -21,7 +21,7 @@
         },
         fontFamily: {
           display: ['Bevan', 'serif'],
-          sans: ['Inter', 'sans-serif'],
+          sans: ['Lora', 'serif'],
         },
       },
     },
@@ -38,7 +38,9 @@
      once the preloader curtain lifts, so the fade-in is actually visible to the user. */
   .hero-reveal-text { opacity: 0; transform: translateY(22px); transition: opacity 0.8s ease, transform 0.8s ease; }
   .hero-reveal-text.is-visible { opacity: 1; transform: translateY(0); }
-  .hero-reveal-image { opacity: 0; transform: translateY(70px) scale(0.94); transition: opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1); }
+  .hero-word { opacity: 0; transform: translateY(0.5em); transition: opacity 0.9s cubic-bezier(.22,1,.36,1), transform 0.9s cubic-bezier(.22,1,.36,1); }
+  .hero-word.is-visible { opacity: 1; transform: translateY(0); }
+  .hero-reveal-image { opacity: 0; transform: translateY(90px) scale(0.92); transition: opacity 1.1s cubic-bezier(.22,1,.36,1), transform 1.1s cubic-bezier(.22,1,.36,1); }
   .hero-reveal-image.is-visible { opacity: 1; transform: translateY(0) scale(1); }
 
   /* Subtle repeated coffee-bean texture, used as a background accent on a few modules */
@@ -81,7 +83,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .reveal, .hero-reveal-text, .hero-reveal-image { transition: none; opacity: 1; transform: none; }
+    .reveal, .hero-reveal-text, .hero-word, .hero-reveal-image { transition: none; opacity: 1; transform: none; }
     .marquee-track, .icon-float, #preloader-icon { animation: none; }
   }
 </style>
@@ -125,10 +127,10 @@
           <circle cx="100" cy="100" r="96" fill="#EDE6D6" stroke="#2B1700" stroke-width="3"/>
           <circle cx="100" cy="100" r="87" fill="none" stroke="#2B1700" stroke-width="1.4"/>
 
-          <text font-family="Inter, sans-serif" font-size="13" font-weight="700" letter-spacing="3" fill="#2B1700">
+          <text font-family="Lora, serif" font-size="13" font-weight="700" letter-spacing="3" fill="#2B1700">
             <textPath href="#logoArcTop" startOffset="6%">EST.</textPath>
           </text>
-          <text font-family="Inter, sans-serif" font-size="13" font-weight="700" letter-spacing="3" fill="#2B1700">
+          <text font-family="Lora, serif" font-size="13" font-weight="700" letter-spacing="3" fill="#2B1700">
             <textPath href="#logoArcTop" startOffset="76%">2026</textPath>
           </text>
 
@@ -150,7 +152,7 @@
           <text x="100" y="115" text-anchor="middle" font-family="Bevan, serif" font-size="24" fill="#2B1700">BATCH</text>
           <text x="100" y="131" text-anchor="middle" font-family="Bevan, serif" font-size="14" fill="#2B1700">No. 9</text>
 
-          <text font-family="Inter, sans-serif" font-size="9" font-weight="600" letter-spacing="1.5" fill="#2B1700">
+          <text font-family="Lora, serif" font-size="9" font-weight="600" letter-spacing="1.5" fill="#2B1700">
             <textPath href="#logoArcBottom" startOffset="50%" text-anchor="middle">SPECIALTY COFFEE</textPath>
           </text>
         </svg>
@@ -189,8 +191,8 @@
 <!-- ===== HERO ===== -->
 <section id="hero" class="relative bg-espresso text-ivory pb-0 overflow-hidden">
   <div class="relative z-0 max-w-[1800px] mx-auto px-5 sm:px-8 lg:px-10 pt-8 sm:pt-14 pb-8">
-    <h1 class="hero-reveal-text font-display text-center leading-[0.95] tracking-wide text-[15vw] sm:text-[10vw] lg:text-[6.3vw] whitespace-normal">
-      POZNAJ<br class="sm:hidden"> SWOJĄ<br class="sm:hidden"> KAWĘ
+    <h1 class="font-display text-center leading-[0.95] tracking-wide text-[15vw] sm:text-[10vw] lg:text-[6.3vw] whitespace-normal">
+      <span class="hero-word inline-block">POZNAJ</span><br class="sm:hidden"> <span class="hero-word inline-block" style="transition-delay:0.13s">SWOJĄ</span><br class="sm:hidden"> <span class="hero-word inline-block" style="transition-delay:0.26s">KAWĘ</span>
     </h1>
 
     <div class="hero-reveal-text delay-150 relative flex items-center justify-between mt-2 sm:mt-4 px-1 sm:px-6">
@@ -296,9 +298,9 @@
     </a>
   </div>
 
-  <div id="carousel" class="reveal mt-14 flex gap-6 overflow-x-auto px-[8vw] sm:px-[12vw] lg:px-[20vw] pb-4 snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+  <div id="carousel" class="reveal mt-14 w-screen relative left-1/2 -translate-x-1/2 flex gap-4 sm:gap-6 overflow-x-auto px-4 sm:px-8 pb-4 snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
     <!-- card 1 -->
-    <div class="carousel-card snap-center shrink-0 w-56 sm:w-64 flex flex-col items-center text-center">
+    <div class="carousel-card snap-center shrink-0 w-[70vw] sm:w-[40vw] lg:w-[26vw] flex flex-col items-center text-center">
       <div class="w-full aspect-square rounded-3xl overflow-hidden mb-5">
         <img src="https://images.unsplash.com/photo-1599639932525-213272ff954b?q=80&w=500&auto=format&fit=crop" alt="Etiopia Yirgacheffe 250g" class="w-full h-full object-cover" loading="lazy">
       </div>
@@ -306,7 +308,7 @@
       <a href="#" class="mt-4 inline-flex items-center justify-center rounded-full border border-espresso/25 text-xs font-semibold uppercase tracking-widest px-6 py-2.5 hover:border-espresso transition-colors">Więcej</a>
     </div>
     <!-- card 2 -->
-    <div class="carousel-card snap-center shrink-0 w-56 sm:w-64 flex flex-col items-center text-center">
+    <div class="carousel-card snap-center shrink-0 w-[70vw] sm:w-[40vw] lg:w-[26vw] flex flex-col items-center text-center">
       <div class="w-full aspect-square rounded-3xl overflow-hidden mb-5">
         <img src="https://images.unsplash.com/photo-1599637777203-34ac21aa929b?q=80&w=500&auto=format&fit=crop" alt="Kolumbia Huila 250g" class="w-full h-full object-cover" loading="lazy">
       </div>
@@ -314,7 +316,7 @@
       <a href="#" class="mt-4 inline-flex items-center justify-center rounded-full border border-espresso/25 text-xs font-semibold uppercase tracking-widest px-6 py-2.5 hover:border-espresso transition-colors">Więcej</a>
     </div>
     <!-- card 3 -->
-    <div class="carousel-card snap-center shrink-0 w-56 sm:w-64 flex flex-col items-center text-center">
+    <div class="carousel-card snap-center shrink-0 w-[70vw] sm:w-[40vw] lg:w-[26vw] flex flex-col items-center text-center">
       <div class="w-full aspect-square rounded-3xl overflow-hidden mb-5">
         <img src="https://images.unsplash.com/photo-1599639957043-f3aa5c986398?q=80&w=500&auto=format&fit=crop" alt="Espresso Blend 1kg" class="w-full h-full object-cover" loading="lazy">
       </div>
@@ -322,7 +324,7 @@
       <a href="#" class="mt-4 inline-flex items-center justify-center rounded-full border border-espresso/25 text-xs font-semibold uppercase tracking-widest px-6 py-2.5 hover:border-espresso transition-colors">Więcej</a>
     </div>
     <!-- card 4 -->
-    <div class="carousel-card snap-center shrink-0 w-56 sm:w-64 flex flex-col items-center text-center">
+    <div class="carousel-card snap-center shrink-0 w-[70vw] sm:w-[40vw] lg:w-[26vw] flex flex-col items-center text-center">
       <div class="w-full aspect-square rounded-3xl overflow-hidden mb-5">
         <img src="https://images.unsplash.com/photo-1712402832925-d41c446883d3?q=80&w=500&auto=format&fit=crop" alt="Brazylia Cerrado 250g" class="w-full h-full object-cover" loading="lazy">
       </div>
@@ -330,7 +332,7 @@
       <a href="#" class="mt-4 inline-flex items-center justify-center rounded-full border border-espresso/25 text-xs font-semibold uppercase tracking-widest px-6 py-2.5 hover:border-espresso transition-colors">Więcej</a>
     </div>
     <!-- card 5 -->
-    <div class="carousel-card snap-center shrink-0 w-56 sm:w-64 flex flex-col items-center text-center">
+    <div class="carousel-card snap-center shrink-0 w-[70vw] sm:w-[40vw] lg:w-[26vw] flex flex-col items-center text-center">
       <div class="w-full aspect-square rounded-3xl overflow-hidden mb-5">
         <img src="https://images.unsplash.com/photo-1703646613751-ff7efcb76afa?q=80&w=500&auto=format&fit=crop" alt="Zestaw Degustacyjny 3×100g" class="w-full h-full object-cover" loading="lazy">
       </div>
@@ -491,7 +493,7 @@
     const pct = document.getElementById('preloader-pct');
 
     function revealHero() {
-      document.querySelectorAll('.hero-reveal-text, .hero-reveal-image').forEach((el) => {
+      document.querySelectorAll('.hero-reveal-text, .hero-word, .hero-reveal-image').forEach((el) => {
         el.classList.add('is-visible');
       });
     }
@@ -504,9 +506,13 @@
         clearInterval(timer);
         setTimeout(() => {
           preloader.classList.add('hidden'); // slides the curtain up (see CSS)
-          revealHero();
+          // The curtain (position:fixed, translateY(-100%)) uncovers the viewport
+          // bottom-first, so the hero heading near the top only becomes visible in
+          // the final moments of the lift. Wait for it to finish before starting
+          // the hero text/image animation, or most of it plays out unseen underneath.
           preloader.addEventListener('transitionend', () => {
             preloader.style.display = 'none';
+            revealHero();
           }, { once: true });
         }, 300);
       }
